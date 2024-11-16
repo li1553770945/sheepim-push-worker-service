@@ -1,0 +1,3 @@
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8890","time":"2024-11-13T22:10:45+08:00"}
+{"level":"info","msg":"start keepalive lease 694d9325d3dd4a18 for etcd registry","time":"2024-11-13T22:10:46+08:00"}
+{"level":"info","msg":"stop keep register service kitex/registry-etcd/sheepim-online-service/192.168.105.1:8890","time":"2024-11-14T14:16:42+08:00"}

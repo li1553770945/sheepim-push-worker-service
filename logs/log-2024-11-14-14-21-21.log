@@ -1,0 +1,4 @@
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8890","time":"2024-11-14T14:21:29+08:00"}
+{"level":"info","msg":"start keepalive lease 694d9325d3dd4b77 for etcd registry","time":"2024-11-14T14:21:30+08:00"}
+{"level":"info","msg":"stop keep register service kitex/registry-etcd/sheepim-online-service/192.168.105.1:8890","time":"2024-11-14T14:21:34+08:00"}
+{"level":"fatal","msg":"server stopped with error:failed to upload metrics: rpc error: code = Unimplemented desc = unknown service opentelemetry.proto.collector.metrics.v1.MetricsService","time":"2024-11-14T14:21:34+08:00"}
