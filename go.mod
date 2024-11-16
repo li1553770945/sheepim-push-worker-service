@@ -1,4 +1,4 @@
-module github.com/li1553770945/sheepim-online-service
+module github.com/li1553770945/sheepim-push-worker-service
 
 go 1.23.3
 

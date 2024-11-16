@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-RUN_NAME="sheepim-online-service"
+RUN_NAME="sheepim-push-worker-service"
 
 mkdir -p output/bin
 cp script/* output/

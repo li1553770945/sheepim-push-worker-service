@@ -2,10 +2,10 @@ package project
 
 import (
 	"context"
-	"github.com/li1553770945/sheepim-online-service/biz/constant"
-	"github.com/li1553770945/sheepim-online-service/biz/internal/converter"
-	"github.com/li1553770945/sheepim-online-service/kitex_gen/base"
-	"github.com/li1553770945/sheepim-online-service/kitex_gen/project"
+	"github.com/li1553770945/sheepim-push-worker-service/biz/constant"
+	"github.com/li1553770945/sheepim-push-worker-service/biz/internal/converter"
+	"github.com/li1553770945/sheepim-push-worker-service/kitex_gen/base"
+	"github.com/li1553770945/sheepim-push-worker-service/kitex_gen/project"
 )
 
 func (s *ProjectService) GetProjectNum(ctx context.Context) (*project.ProjectNumResp, error) {

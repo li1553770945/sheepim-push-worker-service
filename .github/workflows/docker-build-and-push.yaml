@@ -24,9 +24,9 @@ jobs:
       # 构建 Docker 镜像
       - name: Build Docker image
         run: |
-          docker build -t peacesheep/sheepim-online-service:latest .
+          docker build -t peacesheep/sheepim-push-worker-service:latest .
 
       # 推送 Docker 镜像
       - name: Push Docker image
         run: |
-          docker push peacesheep/sheepim-online-service:latest
+          docker push peacesheep/sheepim-push-worker-service:latest

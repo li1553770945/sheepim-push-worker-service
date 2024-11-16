@@ -3,7 +3,7 @@ package projectservice
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	project "github.com/li1553770945/sheepim-online-service/kitex_gen/project"
+	project "github.com/li1553770945/sheepim-push-worker-service/kitex_gen/project"
 )
 
 // NewServer creates a server.Server with the given handler and options.
