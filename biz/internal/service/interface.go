@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"github.com/li1553770945/sheepim-connect-service/kitex_gen/message/messageservice"
 	"github.com/li1553770945/sheepim-online-service/kitex_gen/online/onlineservice"
 	"github.com/li1553770945/sheepim-push-worker-service/biz/internal/repo"
@@ -16,7 +17,7 @@ type MessageHandlerService struct {
 
 type IMessageHandlerService interface {
 	HandleMessage()
-	handler([]byte, []byte) error
+	handler(context.Context, []byte, []byte) error
 }
 
 func NewMessageHandlerService(repo repo.IRepository,

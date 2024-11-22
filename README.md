@@ -10,22 +10,27 @@ wire
 
 ```yml
 server:
-  listen-address: 192.168.6.241:8897
+  listen-address: 127.0.0.1:8897
   service-name: sheepim-push-worker-service
 
 etcd:
   endpoint:
-    - "xxx:2379"
+    - "127.0.0.1:2379"
 
 open-telemetry:
-  endpoint: "xxx:4417"
+  endpoint: "127.0.0.1:4417"
 
 
 kafka:
   brokers:
-    - "xxx:9092"
+    - "127.0.0.1:9092"
   topic: messages
   group-id: group1
+
+rpc:
+  connect-service-name: sheepim-connect-service
+  online-service-name: sheepim-online-service
+  room-service-name: sheepim-room-service
 
 
 ```
