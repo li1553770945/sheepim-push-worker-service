@@ -18,14 +18,8 @@ package main
 import (
 	"context"
 	"github.com/cloudwego/kitex/pkg/klog"
-	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"github.com/cloudwego/kitex/server"
 	"github.com/kitex-contrib/obs-opentelemetry/provider"
-	"github.com/kitex-contrib/obs-opentelemetry/tracing"
-	etcd "github.com/kitex-contrib/registry-etcd"
 	"github.com/li1553770945/sheepim-push-worker-service/biz/infra/container"
-	"github.com/li1553770945/sheepim-push-worker-service/kitex_gen/project/projectservice"
-	"net"
 	"os"
 )
 
@@ -37,8 +31,6 @@ func main() {
 	container.InitGlobalContainer(env)
 	App := container.GetGlobalContainer()
 
-	serviceName := App.Config.ServerConfig.ServiceName
-
 	defer func(p provider.OtelProvider, ctx context.Context) {
 		err := p.Shutdown(ctx)
 		if err != nil {
@@ -46,23 +38,6 @@ func main() {
 		}
 	}(App.Trace.Provider, context.Background())
 
-	addr, err := net.ResolveTCPAddr("tcp", App.Config.ServerConfig.ListenAddress)
-	if err != nil {
-		panic("设置监听地址出错")
-	}
+	App.MessageHandlerService.HandleMessage()
 
-	r, err := etcd.NewEtcdRegistry(App.Config.EtcdConfig.Endpoint) // r should not be reused.
-	if err != nil {
-		panic(err)
-	}
-	svr := projectservice.NewServer(
-		new(ProjectServiceImpl),
-		server.WithSuite(tracing.NewServerSuite()),
-		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: serviceName}),
-		server.WithRegistry(r),
-		server.WithServiceAddr(addr),
-	)
-	if err := svr.Run(); err != nil {
-		klog.Fatalf("服务启动失败:", err)
-	}
 }

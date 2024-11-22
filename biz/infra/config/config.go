@@ -28,13 +28,25 @@ type DatabaseConfig struct {
 	Address  string `yaml:"address"`
 	Port     int32  `yaml:"port"`
 }
+type KafkaConfig struct {
+	Brokers []string `yaml:"brokers"`  // Kafka Broker 地址列表
+	Topic   string   `yaml:"topic"`    // 主题名称
+	GroupID string   `yaml:"group-id"` // 消费者组 ID
+}
 
+type RpcConfig struct {
+	ConnectServiceName string `yaml:"connect-service-name"`
+	OnlineServiceName  string `yaml:"online-service-name"`
+	RoomServiceName    string `yaml:"room-service-name"`
+}
 type Config struct {
 	Env                 string
 	ServerConfig        ServerConfig        `yaml:"server"`
 	OpenTelemetryConfig OpenTelemetryConfig `yaml:"open-telemetry"`
 	DatabaseConfig      DatabaseConfig      `yaml:"database"`
 	EtcdConfig          EtcdConfig          `yaml:"etcd"`
+	KafkaConfig         KafkaConfig         `yaml:"kafka"`
+	RpcConfig           RpcConfig           `yaml:"rpc"`
 }
 
 func GetConfig(env string) *Config {

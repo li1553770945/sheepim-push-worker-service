@@ -1,28 +1,21 @@
 package repo
 
 import (
-	"github.com/li1553770945/sheepim-push-worker-service/biz/internal/domain"
-	"gorm.io/gorm"
+	"context"
+	"github.com/li1553770945/sheepim-push-worker-service/biz/infra/kafka"
 )
 
 type IRepository interface {
-	SaveProject(project *domain.ProjectEntity) error
-	RemoveProject(projectID int32) error
-	GetProject(projectID int32) (*domain.ProjectEntity, error)
-	GetProjectsNum() (int64, error)
-	GetProjects(from int32, end int32, order string, status int32) (*[]domain.ProjectEntity, error)
+	FetchMessage(ctx context.Context) ([]byte, []byte, error) // 返回 Key、Value 和错误
+
 }
 
 type Repository struct {
-	DB *gorm.DB
+	KafkaClient *kafka.KafkaClient
 }
 
-func NewRepository(db *gorm.DB) IRepository {
-	err := db.AutoMigrate(&domain.ProjectEntity{})
-	if err != nil {
-		panic("迁移用户模型失败：" + err.Error())
-	}
+func NewRepository(kafkaClient *kafka.KafkaClient) IRepository {
 	return &Repository{
-		DB: db,
+		KafkaClient: kafkaClient,
 	}
 }

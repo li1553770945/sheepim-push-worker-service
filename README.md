@@ -10,22 +10,23 @@ wire
 
 ```yml
 server:
-  listen-address: 0.0.0.0:8890
+  listen-address: 192.168.6.241:8897
   service-name: sheepim-push-worker-service
 
 etcd:
   endpoint:
-    - 127.0.0.1:2379
+    - "xxx:2379"
 
 open-telemetry:
-  endpoint: 127.0.0.1:4317
+  endpoint: "xxx:4417"
 
-database:
-  username: xxx
-  password: xxx
-  database: xxx
-  address: xxx
-  port: xxx
+
+kafka:
+  brokers:
+    - "xxx:9092"
+  topic: messages
+  group-id: group1
+
 
 ```
 

@@ -8,8 +8,9 @@ package container
 
 import (
 	"github.com/li1553770945/sheepim-push-worker-service/biz/infra/config"
-	"github.com/li1553770945/sheepim-push-worker-service/biz/infra/database"
+	"github.com/li1553770945/sheepim-push-worker-service/biz/infra/kafka"
 	"github.com/li1553770945/sheepim-push-worker-service/biz/infra/log"
+	"github.com/li1553770945/sheepim-push-worker-service/biz/infra/rpc"
 	"github.com/li1553770945/sheepim-push-worker-service/biz/infra/trace"
 	"github.com/li1553770945/sheepim-push-worker-service/biz/internal/repo"
 	"github.com/li1553770945/sheepim-push-worker-service/biz/internal/service"
@@ -21,9 +22,12 @@ func GetContainer(env string) *Container {
 	configConfig := config.GetConfig(env)
 	traceLogger := log.InitLog()
 	traceStruct := trace.InitTrace(configConfig)
-	db := database.NewDatabase(configConfig)
-	iRepository := repo.NewRepository(db)
-	iProjectService := project.NewProjectService(iRepository)
-	container := NewContainer(configConfig, traceLogger, traceStruct, iProjectService)
+	kafkaClient := kafka.NewKafkaClient(configConfig)
+	iRepository := repo.NewRepository(kafkaClient)
+	client := rpc.NewOnlineClient(configConfig)
+	roomserviceClient := rpc.NewRoomClient(configConfig)
+	messageserviceClient := rpc.NewConnectClient(configConfig)
+	iMessageHandlerService := service.NewMessageHandlerService(iRepository, client, roomserviceClient, messageserviceClient)
+	container := NewContainer(configConfig, traceLogger, traceStruct, iMessageHandlerService)
 	return container
 }

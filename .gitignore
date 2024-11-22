@@ -22,4 +22,4 @@
 thrift_streaming/output
 conf
 output
-log
+logs
