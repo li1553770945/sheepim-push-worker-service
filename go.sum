@@ -127,6 +127,8 @@ github.com/li1553770945/sheepim-connect-service v0.0.0-20241122101209-f2637fa742
 github.com/li1553770945/sheepim-connect-service v0.0.0-20241122101209-f2637fa7421e/go.mod h1:9iKY+vMKeDIQE4IO8ERhwzrrudpPTPTL6djhNWKUA0U=
 github.com/li1553770945/sheepim-online-service v0.0.0-20241119064209-4c53aa976084 h1:PkAPJ4giJOpgrJRxGRv4ya2qTpijvMBTUugJ9BZ3U6c=
 github.com/li1553770945/sheepim-online-service v0.0.0-20241119064209-4c53aa976084/go.mod h1:T50b1igKavIPb9IKv3jFjS1uYjA7RKMxUb0NoVWDzyA=
+github.com/li1553770945/sheepim-push-proxy-service v0.0.0-20241122100112-03e4f2db6ab7 h1:6bR3uwqMgitC0jkX9CwGE68d22W2mwepGuHqU+/Hreg=
+github.com/li1553770945/sheepim-push-proxy-service v0.0.0-20241122100112-03e4f2db6ab7/go.mod h1:HrcLSy+TguDvrlqMillIhCE79w0OOnfvcHJ7epg328Q=
 github.com/li1553770945/sheepim-room-service v0.0.0-20241118164507-6440c30affb0 h1:5pfr3UbFp9xcikpPDfZW1VU4TVo4M1N+vRf32lLuQj8=
 github.com/li1553770945/sheepim-room-service v0.0.0-20241118164507-6440c30affb0/go.mod h1:ZzUtOdrN+HfD55Hs4VFQW2npxngQXuI59f0o9DtplBA=
 github.com/matttproud/golang_protobuf_extensions v1.0.1 h1:4hp9jkHxhMHkqkrB3Ix0jegS5sx/RkqARlsWZ6pIwiU=
