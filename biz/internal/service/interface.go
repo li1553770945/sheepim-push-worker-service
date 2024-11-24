@@ -17,7 +17,7 @@ type MessageHandlerService struct {
 
 type IMessageHandlerService interface {
 	HandleMessage()
-	handler(context.Context, []byte, []byte) error
+	handler(context.Context, []byte, []byte)
 }
 
 func NewMessageHandlerService(repo repo.IRepository,
