@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/cloudwego/kitex/client/callopt"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/li1553770945/sheepim-connect-service/kitex_gen/message"
@@ -15,6 +16,8 @@ import (
 
 func (s *MessageHandlerService) handler(ctx context.Context, keyBytes []byte, valueBytes []byte) error {
 	value := string(valueBytes)
+	var returnError error
+	returnError = nil
 	var messageObj push_proxy.PushMessageReq
 	err := json.Unmarshal([]byte(value), &messageObj)
 	if err != nil {
@@ -56,19 +59,23 @@ func (s *MessageHandlerService) handler(ctx context.Context, keyBytes []byte, va
 			Message:  messageObj.Message,
 		}, callopt.WithHostPort(endpoint))
 		if err != nil {
-			return err
+			returnError = err
+			klog.CtxErrorf(ctx, "消息发送失败%v", err)
 		}
 		if sendMessageResp == nil {
-			return errors.New("未收到回复resp")
+			returnError = errors.New("未收到回复resp")
+			klog.CtxErrorf(ctx, "未收到回复resp")
+			continue
 		}
 
 		if sendMessageResp.BaseResp.Code != 0 {
-			return errors.New(sendMessageResp.BaseResp.Message)
+			returnError = errors.New(fmt.Sprintf("发送失败：%s", sendMessageResp.BaseResp.Message))
+			klog.CtxErrorf(ctx, "发送失败：%s", sendMessageResp.BaseResp.Message)
 		}
 
 	}
 
-	return nil
+	return returnError
 }
 func (s *MessageHandlerService) HandleMessage() {
 
