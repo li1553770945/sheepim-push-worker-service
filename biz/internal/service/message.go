@@ -39,12 +39,15 @@ func (s *MessageHandlerService) handler(ctx context.Context, keyBytes []byte, va
 	if onlineRpcResp.BaseResp.Code != 0 {
 		return errors.New(onlineRpcResp.BaseResp.Message)
 	}
-
+	klog.CtxInfof(ctx, "收到来自%s的消息：%s", messageObj.ClientId, messageObj.Message)
 	onlineMembers := onlineRpcResp.Status
 	for _, onlineMember := range onlineMembers {
+		klog.CtxInfof(ctx, "找到客户端：%s", onlineMember.ClientId)
+
 		if onlineMember.ClientId == messageObj.ClientId {
 			continue
 		}
+		klog.CtxInfof(ctx, "发送到客户端：%s,%s", onlineMember.ClientId, onlineMember.ServerEndpoint)
 		endpoint := onlineMember.ServerEndpoint
 		sendMessageResp, err := s.ConnectClient.SendMessage(ctx, &message.SendMessageReq{
 			ClientId: onlineMember.ClientId,
