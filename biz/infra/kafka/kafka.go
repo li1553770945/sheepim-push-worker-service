@@ -5,6 +5,7 @@ import (
 	"github.com/li1553770945/sheepim-push-worker-service/biz/infra/config"
 	"github.com/segmentio/kafka-go"
 	"log"
+	"time"
 )
 
 // KafkaClient 封装了 Kafka 的生产者和消费者
@@ -67,11 +68,13 @@ func NewKafkaClient(cfg *config.Config) *KafkaClient {
 
 	// 创建消费者
 	consumer := kafka.NewReader(kafka.ReaderConfig{
-		Brokers:  conf.Brokers,
-		GroupID:  conf.GroupID,
-		Topic:    conf.Topic,
-		MinBytes: 10e3, // 10KB
-		MaxBytes: 10e6, // 10MB
+		Brokers:          conf.Brokers,
+		GroupID:          conf.GroupID,
+		Topic:            conf.Topic,
+		MinBytes:         1,                        // 设置为较小的值，类似于 fetch.min.bytes
+		MaxBytes:         10e6,                     // 最大拉取量
+		MaxWait:          10000 * time.Millisecond, // 类似于 fetch.max.wait.ms
+		ReadBatchTimeout: 10000 * time.Millisecond,
 	})
 
 	// 返回封装的 KafkaClient
